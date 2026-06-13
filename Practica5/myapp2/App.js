@@ -23,10 +23,8 @@ export default function App() {
       <Text>---Datos personales/Repaso de Componentes---</Text>
       <Perfil></Perfil> */}
 
-      <Text>---Props---</Text>
       <Perfil nombre="Jose Angel" carrera="Sistemas" materia="P. Movil" cuatri="9°"></Perfil>
-      <Text>--------------------------------</Text>
-      <Text>--------------------------------</Text>
+      <Perfil nombre="Jose Angel" carrera="Sistemas" materia="P. Movil" cuatri="9°"></Perfil>
 
       <StatusBar style="auto" />
     </View>
