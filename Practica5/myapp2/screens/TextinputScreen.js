@@ -75,7 +75,7 @@ export default function TextinputScreen() {
         style={styles.input}
         placeholder="Ingresa tu contraseña de minimo 6 caracteres"
         placeholderTextColor="black"
-        secureTextEntry="true"
+        secureTextEntry={true}
         value={contraseña}
         onChangeText={(texto) => SetContraseña(texto)}
         />
@@ -94,7 +94,7 @@ export default function TextinputScreen() {
         style={styles.input}
         placeholder="Cuentanos sobre ti (Opcional)"
         placeholderTextColor="black"
-        multiline="true"
+        multiline={true}
         numberOfLines={4}
         maxLength={20}
         value={bio}
