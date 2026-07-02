@@ -1,26 +1,96 @@
 /*Zona 1: importaciones de componentes y archivos*/
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image} from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Button, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
 
 /*Zona 2: zona de los componentes visuales (main)*/
 export default function ImageBackgroundScreen() {
-  return (
-    <View style={styles.container}>
+  const [fondo, setFondo] = useState(
+    require('../assets/fondo.jpeg')
+  );
 
-        <Text>Aquí va la practica de Maria Ines</Text>
+  const [splash, setSplash] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSplash(false);
+    }, 3000);
+  }, []);
+
+  if (splash) {
+    return (
+      <View style={styles.splashContainer}>
+        <Image
+          source={require('../assets/wave.png')}
+          resizeMode="contain"
+          style={styles.logo}
+        />
+
+        <Text style={styles.carga}>Cargando...</Text>
+
+        <StatusBar style="auto" />
+      </View>
+    );
+  }
+
+  const cambiarFondo = () => {
+    setFondo(
+      fondo === require('../assets/fondo.jpeg')
+        ? require('../assets/fondo2.jpeg')
+        : require('../assets/fondo.jpeg')
+    );
+  };
+
+  return (
+    <ImageBackground
+      source={fondo}
+      style={styles.fondo}
+      resizeMode="contain"
+    >
+      <View style={styles.centro}>
+        <Text style={styles.texto}>Bienvenido</Text>
+        <Button
+          title="Cambiar Fondo"
+          onPress={cambiarFondo}
+        />
+      </View>
 
       <StatusBar style="auto" />
-    </View>
+    </ImageBackground>
   );
 }
 
 /*Zona 3: estilos y posicionamiento*/
 const styles = StyleSheet.create({
-  container: {
+  fondo: {
     flex: 1,
-    backgroundColor: '#fff',
+    width: '100%',
+  },
+  centro: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    flexDirection:'column'
+  },
+  texto: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  splashContainer: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#1E88E5',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  carga: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: 'white',
+    marginTop: 15,
+  },
+  logo: {
+    width: 150,
+    height: 150,
   },
 });
