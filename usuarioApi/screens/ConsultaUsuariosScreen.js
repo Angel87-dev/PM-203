@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView,View,Text,FlatList,StyleSheet,
+import {SafeAreaView,View,Text,FlatList,StyleSheet,Pressable
 } from 'react-native';
+import {useRouter} from 'expo-router';
 
 export default function ConsultaUsuariosScreen() {
 
+  const router = useRouter();
   const[usuarios, setUsuarios] = useState([]);
 
   const obtenerUsuarios = async()=>{
@@ -19,6 +21,17 @@ export default function ConsultaUsuariosScreen() {
 
   useEffect(()=>{obtenerUsuarios();},[])
 
+  const irADetalle = (item) => {
+    router.push({
+      pathname: '/detalleusuario',
+      params: {
+        id: item.id,
+        nombre: item.nombre,
+        edad: item.edad,
+      },
+    });
+  };
+
   const renderTarjeta = ({ item }) => (
     <View style={styles.card}>
 
@@ -29,6 +42,10 @@ export default function ConsultaUsuariosScreen() {
       <Text style={styles.info}>
         Edad: {item.edad} años
       </Text>
+
+      <Pressable onPress={() => irADetalle(item)} style={styles.linkDetalle}>
+        <Text style={styles.textoDetalle}>Ver detalles →</Text>
+      </Pressable>
 
     </View>
   );
@@ -101,6 +118,17 @@ const styles = StyleSheet.create({
   info: {
     fontSize: 16,
     color: '#4B5563',
+  },
+
+  linkDetalle: {
+    marginTop: 10,
+    alignSelf: 'flex-end',
+  },
+
+  textoDetalle: {
+    color: '#2563EB',
+    fontWeight: '600',
+    fontSize: 14,
   },
 
 });
