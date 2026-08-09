@@ -13,7 +13,7 @@ export default function DetalleUsuario() {
   const [modalVisible, setModalVisible] = useState(false);
   const [cargando, setCargando] = useState(false);
 
-  const API_URL = 'http://localhost:5000/v1/usuarios/';
+  const API_URL = 'http://192.168.100.25:5000/v1/usuarios/';
 
   const mostrarMensaje = (titulo, mensaje) => {
     if (Platform.OS === 'web') {
